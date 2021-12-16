@@ -1,7 +1,14 @@
 let currentDistanceLeft = 0
 let currentDistanceRight = 0
 let direction = "none"
-
+let strip = neopixel.create(DigitalPin.P15, 100, NeoPixelMode.RGB_RGB)
+strip.showRainbow(1, 360)
+strip.show()
+basic.forever(function () {
+    strip.rotate(1)
+    strip.show()
+    basic.pause(100)
+})
 basic.forever(function () {
     if (direction == "right") {
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
@@ -41,12 +48,11 @@ basic.forever(function () {
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
     }
 })
-
 basic.forever(function () {
     if (maqueen.Ultrasonic(PingUnit.Centimeters) > 10) {
         direction = "none"
-        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 2550)
-        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 2300)
+        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 255)
+        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 230)
     } else {
         maqueen.motorStop(maqueen.Motors.All)
         basic.pause(100)
