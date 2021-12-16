@@ -1,7 +1,10 @@
-let driveMode = 1
 let currentDistanceLeft = 0
 let currentDistanceRight = 0
+let driveMode = 1
 let direction = "none"
+input.onButtonPressed(Button.A, function () {
+    driveMode = driveMode + 1
+})
 let strip = neopixel.create(DigitalPin.P15, 100, NeoPixelMode.RGB_RGB)
 strip.showRainbow(1, 360)
 strip.show()
@@ -10,19 +13,22 @@ basic.forever(function () {
     strip.show()
     basic.pause(100)
 })
-input.onButtonPressed(Button.A, function() {
-    if(driveMode == 3){
-        driveMode = 1
-    } else {
-        driveMode = driveMode + 1
-    }
-})
 basic.forever(function () {
-    if(driveMode == 1) {
+    if (driveMode == 3) {
+        driveMode = 1
+    }
+    if (driveMode == 1) {
+        basic.showLeds(`
+            . . # . .
+            . # # . .
+            . . # . .
+            . . # . .
+            . # # # .
+            `)
         if (maqueen.Ultrasonic(PingUnit.Centimeters) > 10) {
             direction = "none"
             maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 255)
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 230)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 255)
         } else {
             maqueen.motorStop(maqueen.Motors.All)
             basic.pause(100)
@@ -53,8 +59,14 @@ basic.forever(function () {
                 return
             }
         }
-    }
-    else if (driveMode == 2) {
+    } else if (driveMode == 2) {
+        basic.showLeds(`
+            . # # # .
+            . . . # .
+            . # # # .
+            . # . . .
+            . # # # .
+            `)
         maqueen.motorStop(maqueen.Motors.All)
     }
 })
