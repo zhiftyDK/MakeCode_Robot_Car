@@ -29,7 +29,8 @@ basic.forever(function () {
     if (driveMode == 1) {
         if (maqueen.Ultrasonic(PingUnit.Centimeters) > 12) {
             direction = "none"
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 255)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 255)
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 230)
         } else {
             maqueen.motorStop(maqueen.Motors.All)
             basic.pause(500)
@@ -55,7 +56,7 @@ basic.forever(function () {
                 direction = "right"
                 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 30)
                 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 30)
-                basic.pause(1600)
+                basic.pause(1500)
                 maqueen.motorStop(maqueen.Motors.All)
                 return
             }
